@@ -13,11 +13,11 @@
 	<div id="form-cadastro" class="form-cadastro col-lg-12 space-top">
 		<div class="col-md-4"></div>
 		<div class="col-md-4 col-lg-4">
-			<form action="user/RequestSignUp" method="post">
+			<form action="/RequestSignUp" method="post">
 			<img alt="Logo E-vent"
 				src="../../img/logo/E-vent.png" class="img-responsive center-block"/><br />
 				<div class="form-group">
-					<input type="text" name="nome"
+					<input type="text" name="name"
 						placeholder="Nome" class="form-control"/>
 				</div>
 				<div class="form-group">
@@ -25,15 +25,15 @@
 						placeholder="Email" class="form-control"/>
 				</div>
 				<div class="form-group">
-					<input type="text" name="endereco"
+					<input type="text" name="address"
 						placeholder="Endereço" class="form-control"/>
 				</div>
 				<div class="form-group">
-					<input type="text" name="telefone"
+					<input type="text" name="phone"
 						placeholder="Telefone" class="form-control"/>
 				</div>
 				<div class="form-group">
-					<input type="password" name="senha"
+					<input type="password" name="password"
 						placeholder="****" class="form-control"/>
 				</div>
 				<div class="form-group">

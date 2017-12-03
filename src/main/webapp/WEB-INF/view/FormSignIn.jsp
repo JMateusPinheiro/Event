@@ -23,7 +23,7 @@
 					<p>${msg}</p>
 				</div>
 			</c:if>
-			<form method="post" action="/Login">
+			<form method="post" action="/login">
 				<img alt="Logo E-vent" src="../../img/logo/E-vent.png"
 					class="img-responsive center-block" /><br />
 				<div class="form-group">
@@ -32,7 +32,7 @@
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" placeholder="Password"
-						name="senha" required />
+						name="password" required />
 				</div>
 				<button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
 				<br />

@@ -25,7 +25,7 @@ public class EventController {
 	
 	@RequestMapping("adm/rmEvent/{id}")
 	public String removeEvent(@PathVariable("id") int id){
-		eventdao.delete(id);
+		eventdao.deleteById(id);
 		return "redirect:/adm/mngEvent";
 	}
 	

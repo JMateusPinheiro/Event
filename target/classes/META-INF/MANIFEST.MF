@@ -4,8 +4,7 @@ Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: J.Mateus
 Implementation-Vendor-Id: proj.dsp
 Build-Jdk: 1.8.0_111
-Implementation-URL: http://projects.spring.io/spring-boot/DSP-ProjetoF
- inal/
+Implementation-URL: http://projects.spring.io/spring-boot/spring-boot-
+ starter-parent/DSP-ProjetoFinal/
 Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
 

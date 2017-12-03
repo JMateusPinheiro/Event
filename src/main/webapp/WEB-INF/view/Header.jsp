@@ -14,20 +14,20 @@
 							src="../../img/logo/E-vent.png" /></a>
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
-								<c:when test="${usuario != null}">
+								<c:when test="${user != null}">
 									<li class="dropdown"><a id="btn-perfil"
-										class="dropdown-toggle" data-toggle="dropdown" href="#">${usuario.nome}
+										class="dropdown-toggle" data-toggle="dropdown" href="#">${user.nome}
 											<span class="caret"></span>
 									</a>
 										<ul class="dropdown-menu">
 											<li><a href="/usuario"><span
 													class="glyphicon glyphicon-user"></span> Perfil</a></li>
-											<c:if test="${usuario.id == 1}">
+											<c:if test="${user.id == 1}">
 												<li><a href="/AdmEvent"><span
 														class="glyphicon glyphicon-cog"></span> Gerenciar Eventos</a></li>
 											</c:if>
-											<c:if test="${usuario.id > 1}">
-											<li><a href="user/myEvent"><span
+											<c:if test="${user.id != 1}">
+											<li><a href="/user/MyEvents/${user.id}"><span
 														class="glyphicon glyphicon-cog"></span> Meus Eventos</a></li>
 											</c:if>
 											<li role="separator" class="divider"></li>
