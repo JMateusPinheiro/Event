@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +57,7 @@ public class UserController {
 			usuariodao.save(usuario);
 			System.out.println("Conta criada com sucesso: " + usuario.getName());
 			return "redirect:/";
-			}
+		}
 	}
 
 	@RequestMapping("user/Events/{id}")
@@ -92,21 +93,12 @@ public class UserController {
 		return "user/USER_EventDetails";
 	}
 
-	@PostMapping("/login")
-	public String Login(@RequestParam("password") String password, @RequestParam("email") String email, HttpServletRequest req, Principal user){
-		System.out.println(user.getName());
-//		HttpSession session = req.getSession();
-//		User user2 = usuariodao.findByEmail(email);
-//		if(user2.getPassword().equals(password)){
-//			session.setAttribute("user", user2);
-//			if(user2.getId() == 1){
-//				return "redirect:HomeAdm";
-//			}
-//			return "redirect:HomeUser";
-//		}
-//		else{
-//			return "/";	
-//		}
-		return "We are the champion";
+	@RequestMapping("/redirecionar")
+	public String login(Authentication user, Model model){
+		User user2 = usuariodao.findByEmail(user.getName());
+		if(user2.getId() == 1){
+			return "redirect:adm/mngEvent";
+		}
+		return "redirect:user/Events/" + user2.getId();
 	}
 }

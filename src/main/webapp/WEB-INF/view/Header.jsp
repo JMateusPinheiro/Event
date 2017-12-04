@@ -16,7 +16,7 @@
 							<c:choose>
 								<c:when test="${user != null}">
 									<li class="dropdown"><a id="btn-perfil"
-										class="dropdown-toggle" data-toggle="dropdown" href="#">${user.nome}
+										class="dropdown-toggle" data-toggle="dropdown" href="#">${user.name}
 											<span class="caret"></span>
 									</a>
 										<ul class="dropdown-menu">
@@ -31,7 +31,7 @@
 														class="glyphicon glyphicon-cog"></span> Meus Eventos</a></li>
 											</c:if>
 											<li role="separator" class="divider"></li>
-											<li><a href="/deslogar"><span
+											<li><a href="/logout"><span
 													class="glyphicon glyphicon-log-out"></span> Sair</a></li>
 										</ul></li>
 								</c:when>

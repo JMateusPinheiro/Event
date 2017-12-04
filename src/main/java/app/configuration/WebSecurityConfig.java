@@ -23,7 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(PASSWORD_ENCODER);
 	}
 
-	// Test without js and css in ant Matcher's with httpBasic
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -36,6 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.permitAll()
 		.anyRequest()
 		.authenticated()
+		.and()
+		.formLogin()
+		.loginPage("/")
+		.defaultSuccessUrl("/redirecionar")
+		.loginProcessingUrl("/login")
+		.permitAll()
 		.and()
 		.logout()
 		.logoutSuccessUrl("/");

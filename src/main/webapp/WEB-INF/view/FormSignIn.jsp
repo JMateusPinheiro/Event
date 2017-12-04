@@ -23,18 +23,19 @@
 					<p>${msg}</p>
 				</div>
 			</c:if>
-			<form method="post" action="/login">
+			<form name="f" method="post" action="/login">
 				<img alt="Logo E-vent" src="../../img/logo/E-vent.png"
 					class="img-responsive center-block" /><br />
 				<div class="form-group">
-					<input type="email" name="email" placeholder="Email"
+					<input name="username" type="text" placeholder="Email"
 						class="form-control" required />
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Password"
-						name="password" required />
+					<input name="password" type="password" class="form-control"
+						placeholder="Password" id="senha" required />
 				</div>
-				<button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
+				<button name="submit" type="submit"
+					class="btn btn-lg btn-primary btn-block">Entrar</button>
 				<br />
 				<p>
 					Não possui cadastro? Clique <a href="/SignUp">aqui</a>

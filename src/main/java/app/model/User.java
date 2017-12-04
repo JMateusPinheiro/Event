@@ -130,7 +130,7 @@ public class User implements UserDetails{
 
 	@Override
 	public String getName() {
-		return name;
+		return email;
 	}
 
 	@Override @JsonIgnore
