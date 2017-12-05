@@ -32,8 +32,8 @@
 		</form>
 		<div>
 			<c:forEach var="comment" items="${comments}">
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;${comment.comment}</p>
-				<c:forEach var="answer" items="${comment.answer}">
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;${comment.owner} : ${comment.comment}</p>
+				<c:forEach var="answer" items="${comment.answer.owner} :${comment.answer.comment}">
 				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${answer}</p>
 				</c:forEach>
 				<form action="/user/Responder/${event.id}/${comment.id}" method="post">

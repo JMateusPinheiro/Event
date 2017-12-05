@@ -1,6 +1,5 @@
 package app.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,17 +29,18 @@ import app.model.User;
 public class UserController {
 
 	@Autowired
-	UserDao usuariodao;
+	private UserDao usuariodao;
 
 	@Autowired
-	EventDao eventdao;
+	private EventDao eventdao;
 
 	@Autowired
-	CommentDao commentdao;
+	private CommentDao commentdao;
 
 	@Autowired
 	private RoleDao roleDao;
-
+	
+	
 	@PostMapping("/RequestSignUp")
 	public String SignUp(@Valid User usuario, @RequestParam("re-senha") String resenha, @RequestParam("email") String email, RedirectAttributes red)  {
 		if(usuariodao.findByEmail(email) != null){
@@ -49,56 +49,70 @@ public class UserController {
 			return "SignUp";
 		}
 		else {
-			Role role = new Role("USER");
+			Role role = roleDao.getOne((long) 1);
 			roleDao.saveAndFlush(role);
 			usuario.getRoles().add(role);
 			role.getUsers().add(usuario);
 			roleDao.save(role);
 			usuariodao.save(usuario);
-			System.out.println("Conta criada com sucesso: " + usuario.getName());
+			System.out.println("Conta criada com sucesso: " + usuario.getNome());
 			return "redirect:/";
 		}
 	}
 
-	@RequestMapping("user/Events/{id}")
-	public String EventsUser(@PathVariable("id") int id ,Model model){
-		List<Event> eventos = eventdao.findEventsByIdUser(id);
+	@RequestMapping("user/Events")
+	public String EventsUser(Model model, Authentication auth){
+		List<Event> eventos;
+		User user = usuariodao.findByEmail(auth.getName());
+		eventos = eventdao.findEventsByIdUser(user.getId());
+
 		model.addAttribute("events", eventos);
 		return "user/USER_IndexUser";
 	}
 
 	@RequestMapping("user/subEvent/{event_id}")
-	public String subEvent(@PathVariable("event_id") int event_id, HttpServletRequest req){
-		HttpSession session = req.getSession();
+	public String subEvent(@PathVariable("event_id") int event_id, Authentication auth){
+		User user = usuariodao.findByEmail(auth.getName());
 		Event event = eventdao.getOne(event_id);
-		User user = (User) session.getAttribute("user");
-		System.out.println(user.getName());
+		System.out.println(user.getNome());
 		event.getUsuarios().add(user);
 		eventdao.save(event);
-		return "redirect:/user/Events/" + user.getId();
+		return "redirect:/user/Events";
+	}
+	
+	@RequestMapping("user/leaveEvent/{event_id}")
+	public String leaveEvent(Authentication auth, @PathVariable("event_id") int event_id){
+		User user = usuariodao.findByEmail(auth.getName());
+		Event event = eventdao.getOne(event_id);
+		event.getUsuarios().remove(user);
+		eventdao.save(event);
+		return "redirect:/user/MyEvents";
 	}
 
-	@RequestMapping("user/MyEvents/{id}")
-	public String myEvents(@PathVariable("id") int id, Model model){
-		List<Event> myevents = eventdao.findMyEventsByIdUser(id);
+	@RequestMapping("user/MyEvents")
+	public String myEvents(Authentication auth, Model model){
+		User user = usuariodao.findByEmail(auth.getName());
+		List<Event> myevents = eventdao.findMyEventsByIdUser(user.getId());
 		model.addAttribute("myevents", myevents);
 		return "user/USER_MyEvents";
 	}
 
 	@RequestMapping("user/EventDetail/{event_id}")
 	public String eventDetails(@PathVariable("event_id") int event_id, Model model){
-		model.addAttribute("event" ,eventdao.getOne(event_id));
+		model.addAttribute("event", eventdao.getOne(event_id));
 		List<Comment> comments = commentdao.findAll();
 		model.addAttribute("comments", comments);
 		return "user/USER_EventDetails";
 	}
 
 	@RequestMapping("/redirecionar")
-	public String login(Authentication user, Model model){
-		User user2 = usuariodao.findByEmail(user.getName());
-		if(user2.getId() == 1){
+	public String login(Authentication auth, HttpServletRequest req){
+		HttpSession session = req.getSession();
+		User user = usuariodao.findByEmail(auth.getName());
+		session.setAttribute("user", user);
+		if(user.getId() == 1){
 			return "redirect:adm/mngEvent";
 		}
-		return "redirect:user/Events/" + user2.getId();
+		return "redirect:/user/Events/";
 	}
 }

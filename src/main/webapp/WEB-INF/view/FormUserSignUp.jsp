@@ -17,7 +17,7 @@
 			<img alt="Logo E-vent"
 				src="../../img/logo/E-vent.png" class="img-responsive center-block"/><br />
 				<div class="form-group">
-					<input type="text" name="name"
+					<input type="text" name="nome"
 						placeholder="Nome" class="form-control"/>
 				</div>
 				<div class="form-group">

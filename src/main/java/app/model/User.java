@@ -32,14 +32,14 @@ public class User implements UserDetails{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String name;
+	private String nome;
 
 	@Column(unique=true)
 	private String email;
 	private String address;
 	private String phone;
 	private String password;
-	@ManyToMany(mappedBy="users")
+	@ManyToMany(mappedBy="user_event")
 	private List<Event> events;
 
 	private @JsonIgnore Boolean isEnable = true;
@@ -48,9 +48,9 @@ public class User implements UserDetails{
 	@JoinTable(name="role_user", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id")) 
 	private @JsonIgnore List<Role> roles = new ArrayList<Role>();
 
-	public User(int id, String name, String email, String address, String phone, String password, List<Event> events) {
+	public User(int id, String nome, String email, String address, String phone, String password, List<Event> events) {
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.password = password;
 		this.email = email;
 		this.address = address;
@@ -119,8 +119,12 @@ public class User implements UserDetails{
 		this.id = id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getNome(){
+		return this.nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 //------------------------------------

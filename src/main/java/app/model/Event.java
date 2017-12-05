@@ -24,7 +24,7 @@ public class Event {
 	@JoinTable(name = "user_event", 
 	joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"), 
 	inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-	List<User> users;
+	List<User> user_event;
 
 	public Event(int id, String nome, String descricao, String inicio, String fim) {
 		this.id = id;
@@ -69,10 +69,10 @@ public class Event {
 		this.fim = fim;
 	}
 	public List<User> getUsuarios() {
-		return users;
+		return user_event;
 	}
 	public void setUsuarios(List<User> users) {
-		this.users = users;
+		this.user_event = users;
 	}
 
 }

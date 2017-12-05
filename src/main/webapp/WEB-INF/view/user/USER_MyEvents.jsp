@@ -33,7 +33,7 @@
 						<td>${event.fim}</td>
 						<td><a href="/user/EventDetail/${event.id}"
 							class="btn btn-success">Ver Evento</a></td>
-						<td><a href="user/leaveEvent/${event.id}"
+						<td><a href="/user/leaveEvent/${event.id}"
 							class="btn btn-danger">Sair do Evento</a></td>
 					</tr>
 				</c:forEach>
